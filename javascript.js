@@ -14,7 +14,21 @@ function division(firstNumber, secondNumber){
     return firstNumber / secondNumber;
 };
 
-console.log(addition(6,3));
-console.log(subtraction(6,3));
-console.log(multiplication(6,3));
-console.log(division(6,3));
+function operate(operator, firstNumber, secondNumber){
+    switch (operator){
+        case '+':
+            return addition(firstNumber, secondNumber);
+            break;
+        case '-':
+            return subtraction(firstNumber, secondNumber);
+            break;
+        case '*':
+            return multiplication(firstNumber, secondNumber);
+            break;    
+        case '/':
+            return division(firstNumber, secondNumber);
+            break;
+    };
+};
+
+console.log(operate('+',6,4));

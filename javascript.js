@@ -31,4 +31,8 @@ function operate(operator, firstNumber, secondNumber){
     };
 };
 
-console.log(operate('+',6,4));
+function populateDisplay(userCalculatorInput){
+    // function that populates the display when clicking buttons
+    // store the display value in a variable for the next step
+    
+}

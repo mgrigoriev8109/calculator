@@ -31,8 +31,16 @@ function operate(operator, firstNumber, secondNumber){
     };
 };
 
-function populateDisplay(userCalculatorInput){
+function populateDisplay(calculatorButtonClicked){
     // function that populates the display when clicking buttons
     // store the display value in a variable for the next step
-    
-}
+
+    const displayValue = document.getElementById("displayValue");
+    displayValue.value += calculatorButtonClicked;
+    let displayArray = displayValue.value.split("");
+    console.log(displayArray);
+};
+
+populateDisplay(3);
+populateDisplay(3);
+populateDisplay(3);

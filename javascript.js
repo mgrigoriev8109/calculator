@@ -1,3 +1,13 @@
+function addEventListenersToButtons(){
+    const calculatorButtonsArray = document.getElementsByClassName("calculatorButton");
+    for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; buttonInArray++){
+        calculatorButtonsArray[buttonInArray].addEventListener("click", () => {
+            populateDisplay(1);
+        });
+    };
+};
+
+
 function addition(firstNumber, secondNumber){
     return firstNumber + secondNumber;
 };
@@ -34,13 +44,9 @@ function operate(operator, firstNumber, secondNumber){
 function populateDisplay(calculatorButtonClicked){
     // function that populates the display when clicking buttons
     // store the display value in a variable for the next step
-
     const displayValue = document.getElementById("displayValue");
     displayValue.value += calculatorButtonClicked;
     let displayArray = displayValue.value.split("");
-    console.log(displayArray);
 };
 
-populateDisplay(3);
-populateDisplay(3);
-populateDisplay(3);
+addEventListenersToButtons();

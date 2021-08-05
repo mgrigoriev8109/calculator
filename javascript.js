@@ -15,7 +15,8 @@ for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; butto
 };
 
 equalButton.addEventListener("click", () => {
-    calculate(displayArray);
+    //calculate(displayArray);
+    console.log(calculate(displayArray));
 });
 
 function populateDisplay(calculatorButtonClicked){
@@ -30,7 +31,7 @@ function populateDisplay(calculatorButtonClicked){
 function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
-    let possibleOperators = /[+-*/]/;
+    let possibleOperators = new RegExp("/+-*");
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
         if (currentIndex == (array.length-1)){
             return operate(currentOperator, numberBeforeOperator, accumulator);

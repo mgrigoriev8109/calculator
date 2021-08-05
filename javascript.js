@@ -31,24 +31,31 @@ function populateDisplay(calculatorButtonClicked){
 function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
-    let possibleOperators = new RegExp("/+-*");
+    let possibleOperators = /\+/;
+    
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
-        if (currentIndex == (array.length-1)){
-            return operate(currentOperator, numberBeforeOperator, accumulator);
-        } // first we check if we're at the end of our displayArray, if we are we calculate and return
 
-        else if ( accumulator.isNan() === false && currentValue.isNan() === false){
+        if (currentIndex == (array.length-1) && accumulator =="0"){
+            return operate(currentOperator, numberBeforeOperator, currentValue);
+        } // If the last number is a single digit we assign the currentValue instead of the accumulator
+        
+        else if (currentIndex == (array.length-1)){
+            accumulator = accumulator + currentValue;
+             return operate(currentOperator, numberBeforeOperator, accumulator);
+         } // first we check if we're at the end of our displayArray, if we are we calculate and return
+        
+        else if ( isNaN(accumulator) === false && isNaN(currentValue) === false){
             return accumulator + currentValue;
         } // If displayArray[i] and displayArray[i+1] are strings of numbers they get concatenated
 
-        else if (accumulator.isNan() === false && currentValue == possibleOperators){
+        else if (isNaN(accumulator) === false && possibleOperators.test(currentValue)){
             currentOperator = currentValue;
             numberBeforeOperator = parseInt(accumulator);
             return "0";
         } // If an operator comes up, accumulated string gets turned into integer,
         // the operator gets stored as currentOperator, and accumulator becomes 0 string
 
-        else if(accumulator.isNan() === false && currentValue == possibleOperators && numberBeforeOperator.isNan() === false){
+        else if(isNaN(accumulator) === false && possibleOperators.test(currentValue) && isNaN(numberBeforeOperator) === false){
             numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
             currentOperator = currentValue;
             return "0";
@@ -57,6 +64,7 @@ function calculate(array){
         // currentValue operator becomes the new currentOperator
 
     }, 0);
+    return calculatedValue;
 };
 
 function addition(firstNumber, secondNumber){

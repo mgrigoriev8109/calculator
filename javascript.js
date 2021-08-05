@@ -2,7 +2,8 @@ function addEventListenersToButtons(){
     const calculatorButtonsArray = document.getElementsByClassName("calculatorButton");
     for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; buttonInArray++){
         calculatorButtonsArray[buttonInArray].addEventListener("click", () => {
-            populateDisplay(1);
+            
+            populateDisplay(calculatorButtonsArray[buttonInArray].textContent);
         });
     };
 };

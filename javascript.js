@@ -24,11 +24,38 @@ function populateDisplay(calculatorButtonClicked){
     return displayArray = displayValue.value.split("");
 };
 
+// This function needs to be finished with the logic to test for accumulator == string(0->9), currentValue == string(0->9), 
+// numberBeforeOperator == an integer, and currentValue == operator(+ - * /)
+// possibly through regular expressions since everything is in strings?
 function calculate(array){
-    let calculatedValue = array.reduce((accumulator, currentValue) => {
+    let currentOperator = "";
+    let numberBeforeOperator;
+    let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
+        if (currentIndex == (array.length-1)){
+            return operate(currentOperator, numberBeforeOperator, accumulator);
+        } // first we check if we're at the end of our displayArray, if we are we calculate and return
+
+        else if (accumulator == number && currentValue == number){
+            return accumulator + currentValue;
+        } // If displayArray[i] and displayArray[i+1] are strings of numbers they get concatenated
+
+        else if (accumulator == number && currentValue == operator){
+            currentOperator = currentValue;
+            numberBeforeOperator = parseInt(accumulator);
+            return "0";
+        } // If an operator comes up, accumulated string gets turned into integer,
+        // the operator gets stored as currentOperator, and accumulator becomes 0 string
+
+        else if(accumulator == number && currentValue == operator && numberBeforeOperator == number){
+            numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
+            currentOperator = currentValue;
+            return "0";
+        }; // continuing on, if we hit ANOTHER operator we take numberBeforeOperator, currentOperator, and
+        // execute operate(), the result of which becomes the new numberBeforeOperator, and the upcoming
+        // currentValue operator becomes the new currentOperator
 
     }, 0);
-}
+};
 
 function addition(firstNumber, secondNumber){
     return firstNumber + secondNumber;

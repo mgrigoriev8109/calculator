@@ -30,23 +30,24 @@ function populateDisplay(calculatorButtonClicked){
 function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
+    let possibleOperators = /[+-*/]/;
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
         if (currentIndex == (array.length-1)){
             return operate(currentOperator, numberBeforeOperator, accumulator);
         } // first we check if we're at the end of our displayArray, if we are we calculate and return
 
-        else if (accumulator == number && currentValue == number){
+        else if ( accumulator.isNan() === false && currentValue.isNan() === false){
             return accumulator + currentValue;
         } // If displayArray[i] and displayArray[i+1] are strings of numbers they get concatenated
 
-        else if (accumulator == number && currentValue == operator){
+        else if (accumulator.isNan() === false && currentValue == possibleOperators){
             currentOperator = currentValue;
             numberBeforeOperator = parseInt(accumulator);
             return "0";
         } // If an operator comes up, accumulated string gets turned into integer,
         // the operator gets stored as currentOperator, and accumulator becomes 0 string
 
-        else if(accumulator == number && currentValue == operator && numberBeforeOperator == number){
+        else if(accumulator.isNan() === false && currentValue == possibleOperators && numberBeforeOperator.isNan() === false){
             numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
             currentOperator = currentValue;
             return "0";

@@ -32,16 +32,17 @@ function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
     let possibleOperators = /\+/;
-    
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
 
         if (currentIndex == (array.length-1) && accumulator =="0"){
+            currentValue = parseInt(currentValue);
             return operate(currentOperator, numberBeforeOperator, currentValue);
         } // If the last number is a single digit we assign the currentValue instead of the accumulator
         
         else if (currentIndex == (array.length-1)){
             accumulator = accumulator + currentValue;
-             return operate(currentOperator, numberBeforeOperator, accumulator);
+            accumulator = parseInt(accumulator);
+            return operate(currentOperator, numberBeforeOperator, accumulator);
          } // first we check if we're at the end of our displayArray, if we are we calculate and return
         
         else if ( isNaN(accumulator) === false && isNaN(currentValue) === false){

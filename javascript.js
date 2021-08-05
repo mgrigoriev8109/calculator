@@ -5,23 +5,30 @@
 // they become an operator, all the numbers before the operator are concatenated into 
 // a single number, all those after are concatenated, and we perform operate(). If there
 // is another operator this continues, if not this is the final value
-
-function calculate(){
-    let calculatedValue = displayArray.reduce((accumulator, currentValue) => {
-
-    }, 0);
-}
-
-
 const calculatorButtonsArray = document.getElementsByClassName("calculatorButton");
+const equalButton = document.getElementById("equal");
+
 for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; buttonInArray++){
     calculatorButtonsArray[buttonInArray].addEventListener("click", () => {            
         populateDisplay(calculatorButtonsArray[buttonInArray].textContent);
-        console.log(displayArray);
     });
 };
 
+equalButton.addEventListener("click", () => {
+    calculate(displayArray);
+});
 
+function populateDisplay(calculatorButtonClicked){
+    const displayValue = document.getElementById("displayValue");
+    displayValue.value += calculatorButtonClicked;
+    return displayArray = displayValue.value.split("");
+};
+
+function calculate(array){
+    let calculatedValue = array.reduce((accumulator, currentValue) => {
+
+    }, 0);
+}
 
 function addition(firstNumber, secondNumber){
     return firstNumber + secondNumber;
@@ -55,11 +62,3 @@ function operate(operator, firstNumber, secondNumber){
             break;
     };
 };
-
-function populateDisplay(calculatorButtonClicked){
-    const displayValue = document.getElementById("displayValue");
-    displayValue.value += calculatorButtonClicked;
-    return displayArray = displayValue.value.split("");
-};
-
-addEventListenersToButtons();

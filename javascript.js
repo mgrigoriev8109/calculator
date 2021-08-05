@@ -31,7 +31,7 @@ function populateDisplay(calculatorButtonClicked){
 function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
-    let possibleOperators = /\+/;
+    let possibleOperators = /[\+\*\-//]/;
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
 
         if (currentIndex == (array.length-1) && accumulator =="0"){

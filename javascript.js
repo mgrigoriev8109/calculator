@@ -1,17 +1,19 @@
-// let's think about what we're trying to code. we have displayArray storing our values
-// there needs to be a conditional at some point watching over the values going into 
-// the display Array. Possibly through a nested conditional watch to see when numbers
-// become an operator, then numbers again, then an operator again. This second time 
-// they become an operator, all the numbers before the operator are concatenated into 
-// a single number, all those after are concatenated, and we perform operate(). If there
-// is another operator this continues, if not this is the final value
-const calculatorButtonsArray = document.getElementsByClassName("calculatorButton");
+const calculatorButtonArray = document.getElementsByClassName("calculatorButton");
+const calculatorButtonOperatorArray = document.getElementsByClassName("calculatorButtonOperatorArray");
 const equalButton = document.getElementById("equal");
 const clearButton = document.getElementById("clear");
+const decimalButton = document.getElementById("decimal");
 
-for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; buttonInArray++){
-    calculatorButtonsArray[buttonInArray].addEventListener("click", () => {            
-        populateDisplay(calculatorButtonsArray[buttonInArray].textContent);
+for (let buttonInArray = 0; buttonInArray < calculatorButtonArray.length; buttonInArray++){
+    calculatorButtonArray[buttonInArray].addEventListener("click", () => {            
+        populateDisplay(calculatorButtonArray[buttonInArray].textContent);
+    });
+};
+
+for (let buttonInOperatorArray = 0; buttonInOperatorArray < calculatorButtonOperatorArray.length; buttonInOperatorArray++){
+    calculatorButtonOperatorArray[buttonInOperatorArray].addEventListener("click", () => {            
+        populateDisplay(calculatorButtonOperatorArray[buttonInOperatorArray].textContent);
+        decimalButton.disabled = false;
     });
 };
 
@@ -22,6 +24,10 @@ equalButton.addEventListener("click", () => {
 clearButton.addEventListener("click", () => {
     displayValue.value = 0;
 });
+
+decimalButton.addEventListener("click", () => {
+    decimalButton.disabled = true;
+})
 
 function populateDisplay(calculatorButtonClicked){
     let displayValue = document.getElementById("displayValue");
@@ -36,7 +42,7 @@ function calculate(array){
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
 
         if (currentIndex == (array.length-1) && accumulator =="0"){
-            currentValue = parseInt(currentValue);
+            currentValue = Math.round(currentValue*100)/100;
             if (currentValue == 0 && currentOperator == "/"){
                 alert("Please don't divide by zero let's try again.");
                 return displayValue.value = 0;
@@ -46,7 +52,7 @@ function calculate(array){
 
         else if (currentIndex == (array.length-1)){
             accumulator = accumulator + currentValue;
-            accumulator = parseInt(accumulator);
+            accumulator = Math.round(accumulator*100)/100;
             if (accumulator == 0 && currentOperator == "/"){
                 alert ("Please don't divide by zero, let's try again.");
                 return displayValue.value = 0;
@@ -54,12 +60,12 @@ function calculate(array){
             return operate(currentOperator, numberBeforeOperator, accumulator).toFixed(2);
          }
 
-        else if ( isNaN(accumulator) === false && isNaN(currentValue) === false){
+        else if ( isNaN(accumulator) === false && ( currentValue == "." || isNaN(currentValue) === false)){
             return accumulator + currentValue;
         }
 
         else if(isNaN(accumulator) === false && possibleOperators.includes(currentValue) && isNaN(numberBeforeOperator) === false){
-            accumulator = parseInt(accumulator);
+            accumulator = Math.round(accumulator*100)/100;
             numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
             currentOperator = currentValue;
             return "0";
@@ -67,11 +73,11 @@ function calculate(array){
 
         else if (isNaN(accumulator) === false && possibleOperators.includes(currentValue)){
             currentOperator = currentValue;
-            numberBeforeOperator = parseInt(accumulator);
+            numberBeforeOperator = Math.round(accumulator*100)/100;
             return "0";
         }; 
     }, 0);
-    return calculatedValue;
+    return parseFloat(calculatedValue);
 };
 
 function addition(firstNumber, secondNumber){

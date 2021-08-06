@@ -4,3 +4,12 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+#calculator{
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+}
+
+#row1, #row2, #row3, #row4, #row5 {
+    background-color: red;   
+}

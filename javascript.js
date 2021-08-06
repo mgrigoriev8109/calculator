@@ -32,13 +32,13 @@ function calculate(array){
 
         if (currentIndex == (array.length-1) && accumulator =="0"){
             currentValue = parseInt(currentValue);
-            return operate(currentOperator, numberBeforeOperator, currentValue);
+            return operate(currentOperator, numberBeforeOperator, currentValue).toFixed(2);
         }
 
         else if (currentIndex == (array.length-1)){
             accumulator = accumulator + currentValue;
             accumulator = parseInt(accumulator);
-            return operate(currentOperator, numberBeforeOperator, accumulator);
+            return operate(currentOperator, numberBeforeOperator, accumulator).toFixed(2);
          }
 
         else if ( isNaN(accumulator) === false && isNaN(currentValue) === false){

@@ -55,7 +55,7 @@ function calculate(array){
                 return displayValue.value = 0;
             };
             return operate(currentOperator, numberBeforeOperator, currentValue).toFixed(2);
-        }
+        } //Executes if the last number is only one digit
 
         else if (currentIndex == (array.length-1)){
             accumulator = accumulator + currentValue;
@@ -65,24 +65,24 @@ function calculate(array){
                 return displayValue.value = 0;
             };
             return operate(currentOperator, numberBeforeOperator, accumulator).toFixed(2);
-         }
+         } //Executes if the last number is multiple digits
 
         else if ( isNaN(accumulator) === false && ( currentValue == "." || isNaN(currentValue) === false)){
             return accumulator + currentValue;
-        }
+        } // Executes if current array index and past array index are numbers, or decimals
 
         else if(isNaN(accumulator) === false && possibleOperators.includes(currentValue) && isNaN(numberBeforeOperator) === false){
             accumulator = Math.round(accumulator*100)/100;
             numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
             currentOperator = currentValue;
             return "0";
-        }
+        } // Executes if there is an operation to be performed and we've stored a number from prior operations
 
         else if (isNaN(accumulator) === false && possibleOperators.includes(currentValue)){
             currentOperator = currentValue;
             numberBeforeOperator = Math.round(accumulator*100)/100;
             return "0";
-        }; 
+        }; // Executes upon hitting the first operator in the display
     }, 0);
     return parseFloat(calculatedValue);
 };

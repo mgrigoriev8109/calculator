@@ -15,8 +15,7 @@ for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; butto
 };
 
 equalButton.addEventListener("click", () => {
-    //calculate(displayArray);
-    console.log(calculate(displayArray));
+    displayValue.value = calculate(displayArray);
 });
 
 function populateDisplay(calculatorButtonClicked){
@@ -25,9 +24,6 @@ function populateDisplay(calculatorButtonClicked){
     return displayArray = displayValue.value.split("");
 };
 
-// This function needs to be finished with the logic to test for accumulator == string(0->9), currentValue == string(0->9), 
-// numberBeforeOperator == an integer, and currentValue == operator(+ - * /)
-// possibly through regular expressions since everything is in strings?
 function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
@@ -37,17 +33,17 @@ function calculate(array){
         if (currentIndex == (array.length-1) && accumulator =="0"){
             currentValue = parseInt(currentValue);
             return operate(currentOperator, numberBeforeOperator, currentValue);
-        } // If the last number is a single digit we assign the currentValue instead of the accumulator
-        
+        }
+
         else if (currentIndex == (array.length-1)){
             accumulator = accumulator + currentValue;
             accumulator = parseInt(accumulator);
             return operate(currentOperator, numberBeforeOperator, accumulator);
-         } // first we check if we're at the end of our displayArray, if we are we calculate and return
-        
+         }
+
         else if ( isNaN(accumulator) === false && isNaN(currentValue) === false){
             return accumulator + currentValue;
-        } // If displayArray[i] and displayArray[i+1] are strings of numbers they get concatenated
+        }
 
         else if(isNaN(accumulator) === false && possibleOperators.includes(currentValue) && isNaN(numberBeforeOperator) === false){
             accumulator = parseInt(accumulator);
@@ -60,13 +56,7 @@ function calculate(array){
             currentOperator = currentValue;
             numberBeforeOperator = parseInt(accumulator);
             return "0";
-        }; // If an operator comes up, accumulated string gets turned into integer,
-        // the operator gets stored as currentOperator, and accumulator becomes 0 string
-
- // continuing on, if we hit ANOTHER operator we take numberBeforeOperator, currentOperator, and
-        // execute operate(), the result of which becomes the new numberBeforeOperator, and the upcoming
-        // currentValue operator becomes the new currentOperator
-
+        }; 
     }, 0);
     return calculatedValue;
 };

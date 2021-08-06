@@ -31,7 +31,7 @@ function populateDisplay(calculatorButtonClicked){
 function calculate(array){
     let currentOperator = "";
     let numberBeforeOperator;
-    let possibleOperators = /[\+\*\-//]/;
+    let possibleOperators = ["+", "-", "/", "*"];
     let calculatedValue = array.reduce((accumulator, currentValue, currentIndex, array) => {        
 
         if (currentIndex == (array.length-1) && accumulator =="0"){
@@ -49,14 +49,14 @@ function calculate(array){
             return accumulator + currentValue;
         } // If displayArray[i] and displayArray[i+1] are strings of numbers they get concatenated
 
-        else if (isNaN(accumulator) === false && possibleOperators.test(currentValue)){
+        else if (isNaN(accumulator) === false && possibleOperators.includes(currentValue)){
             currentOperator = currentValue;
             numberBeforeOperator = parseInt(accumulator);
             return "0";
         } // If an operator comes up, accumulated string gets turned into integer,
         // the operator gets stored as currentOperator, and accumulator becomes 0 string
 
-        else if(isNaN(accumulator) === false && possibleOperators.test(currentValue) && isNaN(numberBeforeOperator) === false){
+        else if(isNaN(accumulator) === false && possibleOperators.includes(currentValue) && isNaN(numberBeforeOperator) === false){
             numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
             currentOperator = currentValue;
             return "0";

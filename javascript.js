@@ -3,6 +3,9 @@ const calculatorButtonOperatorArray = document.getElementsByClassName("calculato
 const equalButton = document.getElementById("equal");
 const clearButton = document.getElementById("clear");
 const decimalButton = document.getElementById("decimal");
+const backspaceButton = document.getElementById("backspace");
+const displayValue = document.getElementById("displayValue");
+let displayArray = [];
 
 for (let buttonInArray = 0; buttonInArray < calculatorButtonArray.length; buttonInArray++){
     calculatorButtonArray[buttonInArray].addEventListener("click", () => {            
@@ -29,8 +32,12 @@ decimalButton.addEventListener("click", () => {
     decimalButton.disabled = true;
 })
 
+backspaceButton.addEventListener("click", () => {
+    displayValue.value = displayValue.value.slice(0, -1);
+    return displayArray = displayValue.value.slice(0, -1);
+});
+
 function populateDisplay(calculatorButtonClicked){
-    let displayValue = document.getElementById("displayValue");
     displayValue.value += calculatorButtonClicked;
     return displayArray = displayValue.value.split("");
 };

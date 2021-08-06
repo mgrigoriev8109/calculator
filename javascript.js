@@ -32,12 +32,18 @@ function calculate(array){
 
         if (currentIndex == (array.length-1) && accumulator =="0"){
             currentValue = parseInt(currentValue);
+            if (currentValue == 0 && currentOperator == "/"){
+                alert("You should not have done that.");
+            };
             return operate(currentOperator, numberBeforeOperator, currentValue).toFixed(2);
         }
 
         else if (currentIndex == (array.length-1)){
             accumulator = accumulator + currentValue;
             accumulator = parseInt(accumulator);
+            if (accumulator == 0 && currentOperator == "/"){
+                alert ("You should not have done that.");
+            };
             return operate(currentOperator, numberBeforeOperator, accumulator).toFixed(2);
          }
 

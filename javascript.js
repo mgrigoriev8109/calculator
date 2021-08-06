@@ -7,6 +7,7 @@
 // is another operator this continues, if not this is the final value
 const calculatorButtonsArray = document.getElementsByClassName("calculatorButton");
 const equalButton = document.getElementById("equal");
+const clearButton = document.getElementById("clear");
 
 for (let buttonInArray = 0; buttonInArray < calculatorButtonsArray.length; buttonInArray++){
     calculatorButtonsArray[buttonInArray].addEventListener("click", () => {            
@@ -18,8 +19,12 @@ equalButton.addEventListener("click", () => {
     displayValue.value = calculate(displayArray);
 });
 
+clearButton.addEventListener("click", () => {
+    displayValue.value = 0;
+});
+
 function populateDisplay(calculatorButtonClicked){
-    const displayValue = document.getElementById("displayValue");
+    let displayValue = document.getElementById("displayValue");
     displayValue.value += calculatorButtonClicked;
     return displayArray = displayValue.value.split("");
 };
@@ -33,7 +38,8 @@ function calculate(array){
         if (currentIndex == (array.length-1) && accumulator =="0"){
             currentValue = parseInt(currentValue);
             if (currentValue == 0 && currentOperator == "/"){
-                alert("You should not have done that.");
+                alert("Please don't divide by zero let's try again.");
+                return displayValue.value = 0;
             };
             return operate(currentOperator, numberBeforeOperator, currentValue).toFixed(2);
         }
@@ -42,7 +48,8 @@ function calculate(array){
             accumulator = accumulator + currentValue;
             accumulator = parseInt(accumulator);
             if (accumulator == 0 && currentOperator == "/"){
-                alert ("You should not have done that.");
+                alert ("Please don't divide by zero, let's try again.");
+                return displayValue.value = 0;
             };
             return operate(currentOperator, numberBeforeOperator, accumulator).toFixed(2);
          }

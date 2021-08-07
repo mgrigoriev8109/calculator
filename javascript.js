@@ -51,7 +51,7 @@ function calculate(array){
         if (currentIndex == (array.length-1) && accumulator =="0"){
             currentValue = Math.round(currentValue*100)/100;
             if (currentValue == 0 && currentOperator == "/"){
-                alert("Please don't divide by zero let's try again.");
+                alert("Could not calculate after attempt to divide by zero");
                 return displayValue.value = 0;
             };
             return operate(currentOperator, numberBeforeOperator, currentValue).toFixed(2);
@@ -61,7 +61,7 @@ function calculate(array){
             accumulator = accumulator + currentValue;
             accumulator = Math.round(accumulator*100)/100;
             if (accumulator == 0 && currentOperator == "/"){
-                alert ("Please don't divide by zero, let's try again.");
+                alert ("Could not calculate after attempt to divide by zero");
                 return displayValue.value = 0;
             };
             return operate(currentOperator, numberBeforeOperator, accumulator).toFixed(2);
@@ -72,13 +72,17 @@ function calculate(array){
         } // Executes if current array index and past array index are numbers, or decimals
 
         else if(isNaN(accumulator) === false && possibleOperators.includes(currentValue) && isNaN(numberBeforeOperator) === false){
-            accumulator = Math.round(accumulator*100)/100;
+            accumulator = Math.round(accumulator*100)/100;                
+            if (accumulator == 0 && currentOperator == "/"){
+                alert("Could not calculate after attempt to divide by zero");
+                return displayValue.value = 0;
+            };
             numberBeforeOperator = operate(currentOperator, numberBeforeOperator, accumulator);
             currentOperator = currentValue;
             return "0";
         } // Executes if there is an operation to be performed and we've stored a number from prior operations
 
-        else if (isNaN(accumulator) === false && possibleOperators.includes(currentValue)){
+        else if(isNaN(accumulator) === false && possibleOperators.includes(currentValue)){
             currentOperator = currentValue;
             numberBeforeOperator = Math.round(accumulator*100)/100;
             return "0";
@@ -100,6 +104,7 @@ function multiplication(firstNumber, secondNumber){
 };
 
 function division(firstNumber, secondNumber){
+    
     return firstNumber / secondNumber;
 };
 

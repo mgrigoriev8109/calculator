@@ -3,16 +3,28 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:rgba(231, 166, 166, 0.479)
+    background-color:rgba(177, 120, 39, 0.616)
+
 }
 
 #calculator{
     height: 500px;
     width: 350px;
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: stretch;
+    border: 1px black solid;
 }
 
-#row1, #row2, #row3, #row4, #row5 {
-    background-color: rgb(142, 143, 167);   
+#displayValue{
+    width: 350px;
+}
+
+#equal, #clear, #backspace {
+    width: 116px;
+}
+
+.calculatorButton, .calculatorButtonOperatorArray {
+    width: 70px;
 }

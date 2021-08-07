@@ -3,7 +3,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:rgba(177, 120, 39, 0.616)
+    background-color:rgba(211, 163, 100, 0.699)
 
 }
 
@@ -14,17 +14,35 @@ body{
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: stretch;
-    border: 1px black solid;
+    border: 1px black solid;  
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+         box-shadow: 0 10px 6px -6px #777;
 }
 
 #displayValue{
     width: 350px;
+    margin: 1px;
+    font-size: 16px;
+    padding: 12px 20px;
+    background-color: white;
+    letter-spacing: 0.15em;
 }
 
 #equal, #clear, #backspace {
-    width: 116px;
+    width: 114px;
+    margin: 1px;
 }
 
 .calculatorButton, .calculatorButtonOperatorArray {
-    width: 70px;
+    width: 68px;
+    margin: 1px;
+}
+
+button {
+    font-size: 15px;
+}
+
+.calculatorButtonOperatorArray {
+    font-size: 20px;
 }
